@@ -1,0 +1,38 @@
+for(1-start;1-bool;1-end)
+{
+	P;
+	Q;
+	for(2-start;2-bool;2-end)
+	{
+		A;
+		if(exp-L-2)
+		{
+			B;
+			C;
+		}
+		else
+		{
+			D;
+			if(exp-L-3)
+			{
+				while(exp-L-3)
+				{
+					F;
+					G;
+					while(exp-L-4)
+					{
+						H;
+						I;
+					}
+					J;
+				}
+				K;
+				E;
+				X;
+			}
+		}
+		Y;
+		Z;
+	}
+	R;
+}
