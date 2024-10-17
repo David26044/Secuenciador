@@ -33,7 +33,7 @@ public class Instruccion {
     
 
     public enum Tipo {
-        IF, FOR, WHILE, ELSE, ASIGNACION
+        IF, FOR, WHILE, ELSE, DO, ASIGNACION
     }
 
     public void nose(int lineaJ) {

@@ -21,7 +21,6 @@ public class Stack<T> {
     public void push(T item) {
         last++;
         stack[last] = item;
-        System.out.println("Se agregó " + item + " en: " + last);
     }
 
     public T pop() {
