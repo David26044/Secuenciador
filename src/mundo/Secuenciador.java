@@ -52,7 +52,6 @@ public class Secuenciador {
 
                 if (linea.contains("do")) {
                     instrucciones[i] = new Instruccion(linea, i, DO);
-                    System.out.println(linea);
                     stack.push(i);
                     linea = br.readLine();
                     continue;
@@ -71,8 +70,7 @@ public class Secuenciador {
                     i++;
                     instrucciones[i] = new Instruccion(txtFor[1], i, FOR);
 
-                    temp = txtFor[2].substring(0, txtFor[2].length() - 1) + ";";
-                    System.out.println(temp);
+                    temp = txtFor[2].substring(0, txtFor[2].length() - 2) + ";";
                     linea = br.readLine();
                     stack.push(i);
                     continue;
@@ -98,9 +96,8 @@ public class Secuenciador {
                 instrucciones[i] = new Instruccion(linea, i, ASIGNACION);  // Usa la variable en cada iteración
                 linea = br.readLine();  // Actualiza la variable al final del ciclo
             }
-            // arreglarIF(i);
-            for (i = 0; i < 50; i++) {
-                System.out.println(instrucciones[i]);
+            for (i = 1; instrucciones[i] != null; i++) {
+                System.out.println(instrucciones[i].toString());
             }
 
         } catch (IOException e) {
@@ -131,7 +128,7 @@ public class Secuenciador {
         }
         return i;
     }
-
+    
     //retorna la lineaActual-1 para que se ignore el } de este
     public int caseIF(int lineaActual, int lineaEnPila, String nextLinea) {
         if (nextLinea != null) {
@@ -147,16 +144,15 @@ public class Secuenciador {
 
     public int caseFOR(int lineaActual, int lineaEnPila, String lineaIncremento) {
         instrucciones[lineaEnPila].setSalto(lineaActual+2);
-        System.out.println("Linea incremento" + lineaIncremento);
         instrucciones[lineaActual] = new Instruccion(lineaIncremento, lineaActual, ASIGNACION);
-        instrucciones[lineaActual + 1] = new Instruccion("JUMP", lineaActual + 1, lineaEnPila, ASIGNACION);
+        instrucciones[lineaActual + 1] = new Instruccion("JUMP", lineaActual + 1, lineaEnPila, JUMP);
         return lineaActual + 1;
     }
 
     //se retorna la linea actual porque el } se cambia por JUMP asi que no se ignora, se cambia 
     public int caseWHILE(int lineaActual, int lineaEnPila) {
         instrucciones[lineaEnPila].setSalto(lineaActual + 1);
-        instrucciones[lineaActual] = new Instruccion("JUMP", lineaActual, lineaEnPila, ASIGNACION);
+        instrucciones[lineaActual] = new Instruccion("JUMP", lineaActual, lineaEnPila, JUMP);
         return lineaActual;
     }
 
@@ -167,7 +163,6 @@ public class Secuenciador {
 
     public int CaseDOWHILE(int lineaActual, int lineaEnPila, String lineaCondicion) {
         instrucciones[lineaActual] = new Instruccion(manipularWhile(lineaCondicion), lineaActual, lineaEnPila, WHILE);
-        System.out.println("Se agregó: " + manipularWhile(lineaCondicion));
         return lineaActual;
     }
 
@@ -179,13 +174,13 @@ public class Secuenciador {
         for (int i = 1; i < partes.length; i++) {
             temp += partes[i];
         }
-        temp = temp.substring(0, temp.length() - 1);
+        temp = temp.substring(0, temp.length() - 2);
         return temp;
     }
 
     public String manipularWhile(String linea) {
         String temp = manipularIf(linea);
-        return temp.substring(0, temp.length() - 1);
+        return temp;
     }
 
     public String[] manipularFor(String linea) {
@@ -196,10 +191,6 @@ public class Secuenciador {
         partes2 = partes1[1].split(";");
 
         return partes2;
-    }
-
-    public static void main(String[] args) {
-        Secuenciador secuenciador = new Secuenciador();
     }
 
 }

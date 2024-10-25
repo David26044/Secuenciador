@@ -1,21 +1,39 @@
-while(exp-L-1)
+
+int count;
+int major;
+int begin;
+int end;
+int i;
+int n;
+
+read(begin);
+read(end);
+
+while (begin != 0 && end != 0) 
 {
-A;
-if(exp-L-1)
-{
-B;
-C;
-}
-D;
-for(1-start;1-bool;1-end)
-{
-D;
-E;
-for(2-start;2-bool;2-end)
-{
-F;
-G;
-}
-H;
-}
+   major = 0;
+   for (i = begin; i <= fin; i = i + 1) 
+   {
+      n = i;
+      count = 1;
+      while (n != 1) 
+      {
+        count = count + 1;
+        if (n % 2 != 0) 
+        {
+           n = 3 * n + 1;
+        }
+        else 
+        {
+           n = n / 2;
+        }
+      }
+      if (count > major) 
+      {
+          major = count;
+      }
+   }
+   write(begin + " " + end + " " + major);
+   read(begin);
+   read(end);
 }
